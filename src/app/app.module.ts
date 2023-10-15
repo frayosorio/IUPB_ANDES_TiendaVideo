@@ -8,6 +8,8 @@ import { EmpresaComponent } from './componentes/empresa/empresa.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReferenciasMaterialModule } from './referencias-material.module';
 import { FormsModule } from '@angular/forms';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     ReferenciasMaterialModule,
     FormsModule,
+    NgxDatatableModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

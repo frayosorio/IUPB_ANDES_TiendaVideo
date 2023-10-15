@@ -15,4 +15,10 @@
     <button mat-raised-button color="primary" (click)="agregar()">Agregar</button>
     <button mat-raised-button color="accent" (click)="modificar()">Modificar</button>
     <button mat-raised-button color="warn" (click)="verificarEliminar()">Eliminar</button>
+
+    <ngx-datatable class="dark" [headerHeight]="50" [footerHeight]="50" [rowHeight]="20" [rows]="empresas"
+        [columns]="columnas" [columnMode]="modoColumna.force" [limit]="10" [selectionType]="tipoSeleccion.single"
+        (activate)="onActivate($event)" [rowHeight]="'auto'">
+
+    </ngx-datatable>
 </div>

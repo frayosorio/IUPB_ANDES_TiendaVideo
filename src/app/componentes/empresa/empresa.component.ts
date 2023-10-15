@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Empresa } from 'src/app/entidades/empresa';
+import { EmpresaService } from 'src/app/servicios/empresa.service';
 
 @Component({
   selector: 'app-empresa',
@@ -8,13 +10,46 @@ import { Component } from '@angular/core';
 export class EmpresaComponent {
 
   public textoBusqueda: string = "";
+  public empresas: Empresa[] = [];
+  public columnas = [
+    { name: "Nombre Empresa", prop: "nombre" },
+    { name: "Código", prop: "id" },
+    { name: "País", prop: "pais.pais" },
+  ];
 
-  public buscar() {}
 
-  public agregar() {}
+  constructor(private empresaService: EmpresaService,) {
+  }
 
-  public modificar() {}
+  gOnInit(): void {
+    this.listar();
+  }
 
-  public verificarEliminar() {}
+  private listar() {
+    this.empresaService.listar().subscribe(
+      respuesta => {
+        this.empresas = respuesta;
+      },
+      error => {
+        window.alert(error.message)
+      }
+    );
+  }
+
+  public buscar() {
+
+  }
+
+  public agregar() {
+
+  }
+
+  public modificar() {
+
+  }
+
+  public verificarEliminar() {
+
+  }
 
 }
