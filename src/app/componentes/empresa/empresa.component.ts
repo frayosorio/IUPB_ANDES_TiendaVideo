@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { Empresa } from 'src/app/entidades/empresa';
 import { EmpresaService } from 'src/app/servicios/empresa.service';
 
@@ -16,12 +17,13 @@ export class EmpresaComponent {
     { name: "Código", prop: "id" },
     { name: "País", prop: "pais.pais" },
   ];
-
+  public modoColumna = ColumnMode;
+  public tipoSeleccion = SelectionType;
 
   constructor(private empresaService: EmpresaService,) {
   }
 
-  gOnInit(): void {
+  ngOnInit(): void {
     this.listar();
   }
 
@@ -49,7 +51,12 @@ export class EmpresaComponent {
   }
 
   public verificarEliminar() {
+  }
+
+
+  public onActivate(event: any) {
 
   }
+
 
 }
