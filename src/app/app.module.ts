@@ -10,12 +10,14 @@ import { ReferenciasMaterialModule } from './referencias-material.module';
 import { FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { HttpClientModule } from '@angular/common/http';
+import { EmpresaEditarComponent } from './componentes/empresa-editar/empresa-editar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
-    EmpresaComponent
+    EmpresaComponent,
+    EmpresaEditarComponent
   ],
   imports: [
     BrowserModule,

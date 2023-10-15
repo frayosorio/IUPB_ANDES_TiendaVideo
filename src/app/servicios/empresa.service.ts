@@ -21,4 +21,15 @@ export class EmpresaService {
     const urlT = `${this.url}/listar`;
     return this.http.get<Empresa[]>(urlT);
   }
+
+  public agregar(empresa: Empresa): Observable<Empresa> {
+    let urlT = `${this.url}/agregar`;
+    return this.http.post<Empresa>(urlT, empresa);
+  }
+
+  public actualizar(empresa: Empresa): Observable<Empresa> {
+    let urlT = `${this.url}/modificar`;
+    return this.http.put<Empresa>(urlT, empresa);
+  }
+
 }
