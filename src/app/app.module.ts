@@ -11,13 +11,19 @@ import { FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { HttpClientModule } from '@angular/common/http';
 import { EmpresaEditarComponent } from './componentes/empresa-editar/empresa-editar.component';
+import { TituloComponent } from './componentes/titulo/titulo.component';
+import { TituloEditarComponent } from './componentes/titulo-editar/titulo-editar.component';
+import { DecidirComponent } from './componentes/decidir/decidir.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
     EmpresaComponent,
-    EmpresaEditarComponent
+    EmpresaEditarComponent,
+    TituloComponent,
+    TituloEditarComponent,
+    DecidirComponent
   ],
   imports: [
     BrowserModule,
