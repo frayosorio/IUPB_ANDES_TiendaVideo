@@ -22,6 +22,11 @@ export class EmpresaService {
     return this.http.get<Empresa[]>(urlT);
   }
 
+  public buscar(nombre: string): Observable<Empresa[]> {
+    const urlT = `${this.url}/buscar/${nombre}`;
+    return this.http.get<Empresa[]>(urlT);
+  }
+
   public agregar(empresa: Empresa): Observable<Empresa> {
     let urlT = `${this.url}/agregar`;
     return this.http.post<Empresa>(urlT, empresa);
@@ -30,6 +35,11 @@ export class EmpresaService {
   public actualizar(empresa: Empresa): Observable<Empresa> {
     let urlT = `${this.url}/modificar`;
     return this.http.put<Empresa>(urlT, empresa);
+  }
+
+  public eliminar(id: number): Observable<boolean> {
+    let urlT = `${this.url}/eliminar/${id}`;
+    return this.http.delete<boolean>(urlT);
   }
 
 }

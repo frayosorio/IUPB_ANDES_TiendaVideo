@@ -19,8 +19,8 @@
     <mat-form-field appearance="fill">
         <mat-label>Empresa</mat-label>
         <mat-select [(value)]="datos.titulo.empresa!.id">
-            <mat-option *ngFor="let p of datos.empresas" [value]="p.id">
-                {{p.nombre}}
+            <mat-option *ngFor="let e of datos.empresas" [value]="e.id">
+                {{e.nombre}}
             </mat-option>
         </mat-select>
     </mat-form-field>

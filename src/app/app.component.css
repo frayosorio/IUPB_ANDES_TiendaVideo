@@ -1,0 +1,17 @@
+.barraPrincipal {
+    background: #37236d;
+    color: #fff;
+    height: 100px;
+    max-height: 100px;
+    position: relative;
+}
+
+mat-sidenav {
+    margin: 16px;
+    border-right: none;
+    background: #002b5c;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+}

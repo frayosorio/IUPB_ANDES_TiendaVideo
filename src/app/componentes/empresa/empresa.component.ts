@@ -7,6 +7,7 @@ import { EmpresaEditarComponent } from '../empresa-editar/empresa-editar.compone
 import { Pais } from 'src/app/entidades/pais';
 import { PaisService } from 'src/app/servicios/pais.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DecidirComponent } from '../decidir/decidir.component';
 
 @Component({
   selector: 'app-empresa',
@@ -60,6 +61,18 @@ export class EmpresaComponent {
   }
 
   public buscar() {
+    if (this.textoBusqueda.length > 0) {
+      this.empresaService.buscar(this.textoBusqueda).subscribe(
+        respuesta => {
+          this.empresas = respuesta;
+        },
+        (error: HttpErrorResponse) => {
+          window.alert(`Error buscando Empresas: [${error.message}]`);
+        });
+    }
+    else {
+      this.listar();
+    }
 
   }
 
@@ -80,13 +93,15 @@ export class EmpresaComponent {
 
     cuadroDialogo.afterClosed().subscribe(
       datos => {
-        this.empresaService.agregar(datos.empresa).subscribe(respuesta => {
-          this.listar();
-          window.alert("Los datos de la Empresa fueron agregados");
-        },
-          (error: HttpErrorResponse) => {
-            window.alert(`Error agregando la Empresa: [${error.message}]`);
-          });
+        if (datos) {
+          this.empresaService.agregar(datos.empresa).subscribe(respuesta => {
+            this.listar();
+            window.alert("Los datos de la Empresa fueron agregados");
+          },
+            (error: HttpErrorResponse) => {
+              window.alert(`Error agregando la Empresa: [${error.message}]`);
+            });
+        }
       }
     );
   }
@@ -97,30 +112,65 @@ export class EmpresaComponent {
         width: '600px',
         height: '500px',
         data: {
-          encabezado: `Editando a datos del título [${this.empresaSeleccionada.nombre}]`,
+          encabezado: `Editando datos de la Empresa [${this.empresaSeleccionada.nombre}]`,
           empresa: this.empresaSeleccionada,
           paises: this.paises,
         }
       });
-  
+
       cuadroDialogo.afterClosed().subscribe(
         datos => {
-          this.empresaService.actualizar(datos.empresa).subscribe(respuesta => {
-            this.listar();
-            window.alert("Los datos de la Empresa fueron actualizados");
-          },
-            (error: HttpErrorResponse) => {
-              window.alert(`Error actualizando la Empresa: [${error.message}]`);
-            });
+          if (datos) {
+            this.empresaService.actualizar(datos.empresa).subscribe(respuesta => {
+              this.listar();
+              window.alert("Los datos de la Empresa fueron actualizados");
+            },
+              (error: HttpErrorResponse) => {
+                window.alert(`Error actualizando la Empresa: [${error.message}]`);
+              });
+          }
         }
       );
     }
-    else{
+    else {
       window.alert("No hay empresa seleccionada para modificar");
     }
   }
 
   public verificarEliminar() {
+    if (this.empresaSeleccionada != null && this.empresaSeleccionada.id >= 0) {
+      const cuadroDialogo = this.servicioDialogo.open(DecidirComponent, {
+        width: '500px',
+        height: '200px',
+        data: {
+          titulo: `Eliminando registro de la empresa [${this.empresaSeleccionada.nombre}]`,
+          mensaje: "Oíste guevón, estás seguro de eliminar esta información?",
+          id: this.empresaSeleccionada.id,
+        }
+      });
+
+      cuadroDialogo.afterClosed().subscribe(
+        datos => {
+          if (datos) {
+            this.empresaService.eliminar(datos.id).subscribe(respuesta => {
+              if (respuesta == true) {
+                this.listar();
+                window.alert("El registro de la Empresa fue eliminado");
+              }
+              else {
+                window.alert("No se pudo eliminar el registro de la Empresa");
+              }
+            },
+              (error: HttpErrorResponse) => {
+                window.alert(`Error actualizando la Empresa: [${error.message}]`);
+              });
+          }
+        }
+      );
+    }
+    else {
+      window.alert("No hay empresa seleccionada para eliminar");
+    }
   }
 
 
